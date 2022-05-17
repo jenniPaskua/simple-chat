@@ -14,10 +14,19 @@ const AuthStack = () => {
       screenOptions={{
         headerTitleAlign: "center", // 안드로이드, iOS 동일한 위치에서 랜더링
         cardStyle: { backgroundColor: theme.backgroundColor },
+        headerTintColor: theme.headerTintColor,
       }}
     >
-      <Stack.Screen name='Login' component={Login} />
-      <Stack.Screen name='Signup' component={Signup} />
+      <Stack.Screen
+        name='Login'
+        component={Login}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name='Signup'
+        component={Signup}
+        options={{ headerBackTitleVisible: false }}
+      />
     </Stack.Navigator>
   );
 };
