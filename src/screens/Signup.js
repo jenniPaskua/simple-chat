@@ -9,7 +9,7 @@ const Container = styled.View`
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.background};
-  padding: 0 20px;
+  padding: 40px 20px;
 `;
 
 const ErrorText = styled.Text`
@@ -32,21 +32,27 @@ const Signup = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
+  const didMountRef = useRef();
 
+  // 오류 메시지를 한 곳에서 관리하도록 작성
   useEffect(() => {
-    let _errorMessage = "";
-    if (!name) {
-      _errorMessage = "Please enter your name.";
-    } else if (!validateEmail(email)) {
-      _errorMessage = "Place verify your email";
-    } else if (password.length < 6) {
-      _errorMessage = "The password must contain 6 characters at least.";
-    } else if (password !== passwordConfirm) {
-      _errorMessage = "Password need to match.";
+    if (didMountRef.current) {
+      let _errorMessage = "";
+      if (!name) {
+        _errorMessage = "Please enter your name.";
+      } else if (!validateEmail(email)) {
+        _errorMessage = "Place verify your email";
+      } else if (password.length < 6) {
+        _errorMessage = "The password must contain 6 characters at least.";
+      } else if (password !== passwordConfirm) {
+        _errorMessage = "Password need to match.";
+      } else {
+        _errorMessage = "";
+      }
+      setErrorMessage(_errorMessage);
     } else {
-      _errorMessage = "";
+      didMountRef.current = true;
     }
-    setErrorMessage(_errorMessage);
   }, [name, email, password, passwordConfirm]);
 
   useEffect(() => {
@@ -58,10 +64,7 @@ const Signup = () => {
   const _handleSignupButtonPress = () => {};
 
   return (
-    <KeyboardAwareScrollView
-      contentContainerStyle={{ flex: 1 }}
-      extraScrollHeight={20}
-    >
+    <KeyboardAwareScrollView extraScrollHeight={20}>
       <Container>
         <Image rounded />
         <Input
