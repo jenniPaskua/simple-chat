@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components/native";
 import { removeWhitespace, validateEmail } from "../utils/common";
+import { images } from "../utils/images";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Image, Input, Button } from "../components";
 
@@ -22,6 +23,7 @@ const ErrorText = styled.Text`
 `;
 
 const Signup = () => {
+  const [profileImgUrl, setProfileImgUrl] = useState(images.profileImgUrl);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -66,7 +68,7 @@ const Signup = () => {
   return (
     <KeyboardAwareScrollView extraScrollHeight={20}>
       <Container>
-        <Image rounded />
+        <Image rounded url={profileImgUrl} />
         <Input
           label='Name'
           value={name}

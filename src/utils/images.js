@@ -3,4 +3,5 @@ const prefix =
 
 export const images = {
   icon: `${prefix}/icon.png?alt=media`,
+  profileImgUrl: `${prefix}/jenn-illustration.jpeg?alt=media`,
 };
