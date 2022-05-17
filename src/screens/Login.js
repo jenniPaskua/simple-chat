@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components/native";
-import { Image, Input } from "../components";
+import { Image, Input, Button } from "../components";
 import { images } from "../utils/images";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { validateEmail, removeWhitespace } from "../utils/common";
@@ -40,6 +40,8 @@ const Login = ({ navigation }) => {
     setPassword(removeWhitespace(password));
   };
 
+  const _handleLoginButtonPress = () => {};
+
   return (
     <KeyboardAwareScrollView
       contentContainerStyle={{ flex: 1 }}
@@ -51,7 +53,7 @@ const Login = ({ navigation }) => {
           label='Email'
           value={email}
           onChangeText={_handleEmailChange}
-          onSubmitEditing={() => passwordRef.current.focus()}
+          onSubmitEditing={_handleLoginButtonPress}
           placeholder='Email'
           returnKeyType='next'
         />
@@ -66,6 +68,12 @@ const Login = ({ navigation }) => {
           isPassword
         />
         <ErrorText>{errorMessage}</ErrorText>
+        <Button title='Login' onPress={_handleLoginButtonPress} />
+        <Button
+          title='Sign up with email'
+          onPress={() => navigation.navigate("Signup")}
+          isFilled={false}
+        />
       </Container>
     </KeyboardAwareScrollView>
   );
